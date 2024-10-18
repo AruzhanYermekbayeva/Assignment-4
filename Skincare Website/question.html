@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ask a Question</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a href="home.html">Back</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="ask-question">
+        <h1>Ask a Question</h1>
+        <form action="submit_form.php" method="post" id="questionForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="question">Your Question:</label>
+            <textarea id="question" name="question" rows="5" required></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+
+        <!-- Error message container -->
+        <div id="error-message" style="color:red;"></div>
+
+        <p>If you prefer, you can also contact us directly at: aruzhanyermekbayeva945@gmail.com</p>
+    </section>
+
+    <!-- JavaScript for Form Validation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('questionForm'); // Correctly reference the form
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const question = document.getElementById('question');
+            const errorMessageElement = document.getElementById('error-message'); // Correct reference for the error message container
+
+            form.addEventListener('submit', (e) => {
+                let messages = [];
+
+                // Validate name
+                if (name.value === '' || name.value.length <= 1) {
+                    messages.push('Name is required and must be at least 2 characters long.');
+                }
+
+                // Validate email
+                if (email.value === '') {
+                    messages.push('Email is required.');
+                }
+
+                // Validate question
+                if (question.value === '') {
+                    messages.push('Please write your question.');
+                }
+
+                // If there are messages, prevent submission and show messages
+                if (messages.length > 0) {
+                    e.preventDefault(); // Prevent form submission
+                    errorMessageElement.innerText = messages.join(', '); // Show error messages
+                } else {
+                    errorMessageElement.innerText = ''; // Clear previous error messages
+                }
+            });
+        });
+    </script>
+</body>
+</html>
